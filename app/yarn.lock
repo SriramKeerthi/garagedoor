@@ -6198,6 +6198,11 @@ react-native-animatable@^1.3.0:
   dependencies:
     prop-types "^15.7.2"
 
+react-native-autostart@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-native-autostart/-/react-native-autostart-1.0.7.tgz#56087ae431af85a0ee0b37e6975e2292c8d9181f"
+  integrity sha512-MSYfa2M9xCvBtfYniN8Exgn8t0moKCSCtTLROeiuaaJKsS6J/e4vPgS68z+b1IbjyNEeou9yuVjv+irXPVrmhw==
+
 react-native-codegen@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/react-native-codegen/-/react-native-codegen-0.0.6.tgz#b3173faa879cf71bfade8d030f9c4698388f6909"

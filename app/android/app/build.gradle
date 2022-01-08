@@ -231,6 +231,8 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    compile project(':react-native-autostart')
 }
 
 // Run this once to be able to run the application with BUCK

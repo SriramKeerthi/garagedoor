@@ -6,11 +6,12 @@ import * as Location from "expo-location";
 import { GeofencingEventType } from "expo-location";
 import * as Notifications from "expo-notifications";
 import * as TaskManager from "expo-task-manager";
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import HomeScreen from "./src/screens/HomeScreen";
 import { sendBeacon } from "./src/util/util";
+import AutoStart from "react-native-autostart";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -62,11 +63,17 @@ TaskManager.defineTask("LOCATION_GEOFENCE", async ({ data, error }) => {
 function App() {
   const options = { headerTitleStyle: { fontFamily: "Stainless-Bold" } };
 
+  useEffect(() => {
+    if (AutoStart.isCustomAndroid()) {
+      AutoStart.startAutostartSettings();
+    }
+  }, []);
+
   function Header(props: NativeStackHeaderProps) {
     const title =
       typeof props.options.headerTitle === "string"
         ? props.options.headerTitle
-        : props.options.headerTitle?.({});
+        : '';
     return (
       <View style={{ height: 100, backgroundColor: "white", elevation: 10 }}>
         <View
