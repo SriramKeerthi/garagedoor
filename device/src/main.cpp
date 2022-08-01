@@ -5,10 +5,11 @@
 #include <BLEAdvertisedDevice.h>
 #include <Preferences.h>
 
-#define RELAY_PIN              13
-#define LED_CHANNEL            1
-#define LED_PIN                2
-#define INACTIVITY_TIMEOUT     2000
+#define RELAY_PIN               13
+#define LED_CHANNEL             1
+#define LED_PIN                 2
+#define INACTIVITY_TIMEOUT      2000
+#define MAX_RESETS_WITHOUT_CONN 50
 
 /* BLE Settings */
 #define BLE_SCAN_TIME          30
@@ -150,7 +151,7 @@ void setup() {
     if (pref.isKey(CFG_RESET_WITHOUT_CONN)) {
         int resets = pref.getString(CFG_RESET_WITHOUT_CONN).toInt();
         Serial.printf("Resets without connection: %d (%s)\n", resets, pref.getString(CFG_RESET_WITHOUT_CONN).c_str());
-        if (resets > 3) {
+        if (resets > MAX_RESETS_WITHOUT_CONN) {
             pref.clear();
             ESP.restart();
         } else {
@@ -160,7 +161,7 @@ void setup() {
         pref.putString(CFG_RESET_WITHOUT_CONN, "1");
     }
     if (!pref.isKey(CFG_CODE)) {
-        pref.putInt(CFG_CODE, random(65000)); // Generate a random number between 0 - 65000
+        pref.putInt(CFG_CODE, 10000 + random(55000)); // Generate a random number between 10000 - 65000
     }
     Serial.printf("Code: %05d\n", pref.getInt(CFG_CODE));
     if (pref.isKey(CFG_OWNER_UUID)) {
